@@ -52,3 +52,5 @@ libs/
 .metadata
 .vscode
 .settings
+# 포크 jar 사본 (../figura_core_internal 산출물 — 저장소에 올리지 않는다)
+.libs/*

@@ -1,83 +1,71 @@
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-	id "dev.architectury.loom" version "1.9-SNAPSHOT" apply false
-	id "io.github.juuxel.loom-vineflower" version "1.+" apply false
-    id "io.github.pacifistmc.forgix" version "1.2.9"
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 }
 
-architectury {
-    minecraft = rootProject.minecraft_version
+version = "${project.mod_version}+${project.minecraft_version}"
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
 }
 
-subprojects {
-    apply plugin: "dev.architectury.loom"
+repositories {
+	// Simple Voice Chat API
+	maven { url = "https://maven.maxhenkel.de/repository/public" }
+	// Figura 의 LuaJ 포크 — 코어 jar 안에는 중첩 jar 로만 들어 있어서 컴파일용으로 따로 건다
+	maven { url = "https://jitpack.io" }
+}
 
-    loom {
-        silentMojangMappingsLicense()
-    }
+loom {
+	accessWidenerPath = file("src/main/resources/figurasvc.accesswidener")
 
-    repositories {
-        maven { url 'https://maven.quiltmc.org/repository/release/' }
-        maven {
-            name = "Figura Maven Release"
-            url = uri("https://maven.figuramc.org/releases")
-        }
-        maven {
-            name = "Figura Maven Snapshots"
-            url = uri("https://maven.figuramc.org/snapshots")
-        }
-        maven { url 'https://jitpack.io' }
-        maven { url = 'https://maven.maxhenkel.de/repository/public' }
-        maven {
-            name = "Modrinth"
-            url = "https://api.modrinth.com/maven"
-            content {
-                includeGroup "maven.modrinth"
-            }
-        }
-        maven { url 'https://maven.neoforged.net/releases/' }
-    }
-
-    dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-
-        mappings loom.layered {
-			mappings("org.quiltmc:quilt-mappings:$minecraft_version+build.$mappings:intermediary-v2")
-			officialMojangMappings()
+	mods {
+		"figurasvc" {
+			sourceSet sourceSets.main
 		}
-    }
+	}
 }
 
-allprojects {
-    apply plugin: "java"
-    apply plugin: "architectury-plugin"
-    apply plugin: "maven-publish"
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    java_version = rootProject.java_version
-	archivesBaseName = rootProject.archives_base_name
-	version = rootProject.mod_version + "+" + rootProject.minecraft_version
-	group = rootProject.maven_group
-    figura_version = rootProject.figura_version
-
-    repositories {
-
-    }
-
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
-        options.release = 21
-    }
-
-    java {
-        withSourcesJar()
-    }
+	// 커스텀 Figura 포크 (../figura_core_internal 빌드 산출물을 .libs 에 복사) — 런타임에는 게임의 Figura 가 쓴다
+	modCompileOnly files(".libs/${project.figura_jar}")
+	compileOnly "com.github.FiguraMC.luaj:luaj-core:${project.luaj_version}"
+	compileOnly "de.maxhenkel.voicechat:voicechat-api:${project.voicechat_api_version}"
 }
 
-tasks.named("build") {
-    finalizedBy("mergeJars")
+processResources {
+	def props = [
+		"version"       : project.version,
+		"mod_id"        : project.archives_base_name,
+		"display_name"  : project.display_name,
+		"description"   : project.description,
+		"authors"       : project.authors,
+		"figura_version": project.figura_version,
+	]
+	inputs.properties props
+
+	filesMatching("fabric.mod.json") {
+		expand props
+	}
 }
 
-forgix {
-    group = rootProject.maven_group
-    mergedJarName = rootProject.archives_base_name + "-" +  rootProject.mod_version + "+" + rootProject.minecraft_version + ".jar"
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+	it.options.encoding = "UTF-8"
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+	def name = project.base.archivesName.get()
+	from("LICENSE") {
+		rename { "${it}_${name}" }
+	}
 }
