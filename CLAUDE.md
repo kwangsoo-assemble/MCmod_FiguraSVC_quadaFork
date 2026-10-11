@@ -1,8 +1,9 @@
 # FiguraSVC — 내부판 (Fabric 1.21.8 · 스레드 안전 수정)
 
 원본: `github.com/KnownSH/FiguraSVC` (= `FiguraSVC-v2`, 이름만 바뀐 같은 저장소) — **`1.21.4` 브랜치 `9d4b743`** 을 2026-09-30 에 받았다.
-라이선스 LGPL-2.1 (`LICENSE`). 공개판은 없다 — **내부판만** (`project_paths.json` 의 `mc_repositories.figura.figurasvc`).
-원격은 떼어 뒀다. 업스트림을 다시 볼 때: `git fetch https://github.com/KnownSH/FiguraSVC 1.21.4`
+라이선스 LGPL-2.1 (`LICENSE`). GitHub `kwangsoo-assemble/MCmod_FiguraSVC_quadaFork`(공개 · 2026-10-12) — 이 작업본을 그대로 올린다
+(하네스 `projects/mc_repositories/tools/repos.py publish figurasvc` 로만 · README 한글 원본은 하네스 `readme_ko/`).
+업스트림을 다시 볼 때: `git fetch https://github.com/KnownSH/FiguraSVC 1.21.4`
 
 Simple Voice Chat ↔ Figura 연동 애드온이다. 아바타 Lua 에 주는 것:
 
@@ -55,7 +56,7 @@ Simple Voice Chat ↔ Figura 연동 애드온이다. 아바타 Lua 에 주는 �
 ## 배포
 
 - 하네스에서 `python projects/_shared/deploy_mod_jars.py --dry-run` → 게임을 끈 채 실행 (Modrinth 프로필 두 곳).
-  옛 `figurasvc-*.jar` 는 `.bak_<ts>` 로 치운다 (두 판이 같이 있으면 Fabric 이 중복 모드로 죽는다)
+  옛 `figurasvc-*.jar` 는 `.disabled_<ts>` 로 치운다 (두 판이 같이 있으면 Fabric 이 중복 모드로 죽는다)
 - 🙋 **탤런트 모드팩(.mrpack)은 다시 묶어야 한다** — 배포 도구는 이 PC 의 프로필만 바꾼다
 
 ## 검증 · 한계
