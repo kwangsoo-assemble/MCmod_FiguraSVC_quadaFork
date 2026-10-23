@@ -15,10 +15,10 @@
 
 | Item | Value |
 |---|---|
-| Version | `2.0-but-ai-edited.1` — suffix to tell it apart from upstream 2.0 |
+| Version | `2.0.0.2` — upstream 2.0 padded to `2.0.0`, plus a fourth number for this fork's own release (first release: tag `2.0-but-ai-edited.1`) |
 | Based on | upstream branch `1.21.4` at `9d4b743` |
 | Target | Minecraft 1.21.8 · Fabric — upstream's multi-loader setup (architectury · Forge · NeoForge) was removed |
-| Figura | MCmod_Figura_quadaFork `0.1.6-but-ai-edited.1+1.21.8` (not on the official Maven) |
+| Figura | MCmod_Figura_quadaFork `0.1.6.4+1.21.8` (not on the official Maven) |
 | Requires | Simple Voice Chat API `2.6.0` · Fabric Loader 0.16+ (MixinExtras `@WrapMethod`) |
 | Java | 21 |
 
@@ -68,10 +68,10 @@
 
 ```bash
 # 1) Build MCmod_Figura_quadaFork and put its jar in .libs/
-#    .libs/figura-0.1.6-but-ai-edited.1+1.21.8-fabric-mc.jar
+#    .libs/figura-0.1.6.4+1.21.8-fabric-mc.jar
 # 2) Build with JDK 21
 ./gradlew build
-# → build/libs/figurasvc-2.0-but-ai-edited.1+1.21.8.jar
+# → build/libs/figurasvc-2.0.0.2+1.21.8.jar
 ```
 
 - LuaJ (`com.github.FiguraMC.luaj:luaj-core:3.0.8-figura`) only exists as a nested jar inside the core jar, so it is added separately (jitpack)
@@ -96,10 +96,10 @@
 
 | 항목 | 값 |
 |---|---|
-| 버전 | `2.0-but-ai-edited.1` — 업스트림 2.0 과 구분하려고 붙인 꼬리 |
+| 버전 | `2.0.0.2` — 업스트림 2.0 을 셋째 자리까지 채운 `2.0.0` 뒤 넷째 자리가 이 포크의 판 번호(첫 판은 꼬리 `2.0-but-ai-edited.1`) |
 | 기준 | 업스트림 `1.21.4` 브랜치 `9d4b743` |
 | 타깃 | Minecraft 1.21.8 · Fabric — 업스트림의 멀티로더(architectury · Forge · NeoForge)는 걷었다 |
-| 대상 Figura | MCmod_Figura_quadaFork `0.1.6-but-ai-edited.1+1.21.8` (공식 Maven 에 없다) |
+| 대상 Figura | MCmod_Figura_quadaFork `0.1.6.4+1.21.8` (공식 Maven 에 없다) |
 | 의존 | Simple Voice Chat API `2.6.0` · Fabric Loader 0.16+ (MixinExtras `@WrapMethod`) |
 | Java | 21 |
 
@@ -149,10 +149,10 @@
 
 ```bash
 # 1) MCmod_Figura_quadaFork 를 빌드해 그 jar 를 .libs/ 에 둔다
-#    .libs/figura-0.1.6-but-ai-edited.1+1.21.8-fabric-mc.jar
+#    .libs/figura-0.1.6.4+1.21.8-fabric-mc.jar
 # 2) JDK 21 로 빌드
 ./gradlew build
-# → build/libs/figurasvc-2.0-but-ai-edited.1+1.21.8.jar
+# → build/libs/figurasvc-2.0.0.2+1.21.8.jar
 ```
 
 - LuaJ(`com.github.FiguraMC.luaj:luaj-core:3.0.8-figura`)는 코어 jar 안에 중첩 jar 로만 있어 따로 건다(jitpack)

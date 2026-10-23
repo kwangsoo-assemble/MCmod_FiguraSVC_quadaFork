@@ -41,13 +41,13 @@ Simple Voice Chat ↔ Figura 연동 애드온이다. 아바타 Lua 에 주는 �
 
 ## 빌드
 
-- `JAVA_HOME="C:\Program Files\Java\jdk-21" ./gradlew build` → `build/libs/figurasvc-2.0-but-ai-edited.1+1.21.8.jar`
+- `JAVA_HOME="C:\Program Files\Java\jdk-21" ./gradlew build` → `build/libs/figurasvc-2.0.0.2+1.21.8.jar`
 - 도구 사슬은 Chat-Heads 내부판과 같다 — Loom `1.17-SNAPSHOT`(`net.fabricmc.fabric-loom-remap`) + Gradle 9.5.1 · 공식 매핑
 - 업스트림의 멀티로더(architectury · forge · neoforge)는 걷었다 — 이 환경은 Fabric 1.21.8 뿐이다 (첫 커밋 `26cf97a` 에 동작 변경 없음)
 
 ## 의존
 
-- **Figura**: `.libs/figura-0.1.6-but-ai-edited.1+1.21.8-fabric-mc.jar` — `../figura_core_internal` 산출물 사본(git 제외 · 컴파일 전용).
+- **Figura**: `.libs/figura-0.1.6.4+1.21.8-fabric-mc.jar` — `../figura_core_internal` 산출물 사본(git 제외 · 컴파일 전용).
   포크의 `FiguraLuaRuntime.run/init` · `EventsAPI.events` 시그니처가 바뀌면 다시 복사하고 다시 빌드한다
 - **LuaJ**: `com.github.FiguraMC.luaj:luaj-core:3.0.8-figura` (jitpack) — 코어 jar 안에는 중첩 jar 로만 있어 따로 건다
 - **Simple Voice Chat API**: `de.maxhenkel.voicechat:voicechat-api:2.6.0`
